@@ -1,5 +1,5 @@
 # Google-Classroom-Export-plug-in
-Yr 12 SDD Major work
+Yr 12 SDD
 
 /* Student Name(s): Jyotsana Nair, Kevin Liu, Aishani Bhatt
 Assignment Number: 2
