@@ -1,0 +1,50 @@
+BEGIN retrieveStuInfoData
+    
+    LET classdata = NEW Classroom.Courses OBJECT 
+    LET Studata = 
+
+    FOREACH classdata IN course
+        LET students = NEW Classroom.Courses.Students OBJECT
+    END FOR
+
+    FOREACH students in student
+        PUSH ([family name, given name, email address]) IN Studata
+    END FOR
+    
+    LET spreadsheet = 
+    LET sheet = 
+
+    LET startRow = 2
+    LET startColumn = 1
+
+END retrieveCourseDataFrom
+
+
+BEGIN retrieveCourseData
+
+    LET classdata = NEW Classroom.Courses Object 
+    LET Coursedata = 
+
+    FOREACH classdata in course
+        LET students = NEW Classroom.Courses.Students Object
+        LET courseWork = NEW Classroom.Courses.CourseWork Object
+    
+
+        FOREACH courWork in work 
+            LET submissions = NEW Classroom.Courses.Course.StudentSubmissions Object
+        END FOREACH
+
+        FOREACH submissions in submission 
+            LET student = 
+        END FOR
+
+        IF student
+            LET score = 
+        END IF
+
+            PUSH([work title, score]) IN Coursedata 
+    END FOR
+END retrieveCourseData
+
+LET spreadsheet = NEW SpreadsheetApp.openByID OBJECT 
+LET sheet = NEW spreadsheet.getSheetByName OBJECT
