@@ -1,11 +1,54 @@
-function retrieveData() {
+function retrieveStuInfoData() {
     try {
         const classdata = Classroom.Courses.list().courses;
 
-        // Delate an array to store the data
-        const data = [];
+        // Initialize an array to store the data
+        const Studata = [];
 
-        // Loop through each in course classroom 
+        // Loop through each course in Classroom 
+        classdata.forEach(course => {
+            // Retrieve all students for the current course
+            const students = Classroom.Courses.Students.list(course.id).students;
+            
+            // Loop through each student
+            students.forEach(student => {
+                Studata.push([student.profile.name.familyName, student.profile.name.givenName, student.profile.emailAddress]);
+            });
+        });
+
+        Logger.log(Studata);
+
+        // Link spreadsheet
+        const spreadsheet = SpreadsheetApp.openById("1hQzk67w5Au7fCMPb4ySJ81S1qQGRV9v350Lfxycu7Tk");
+        const sheet = spreadsheet.getSheetByName("testsheet");
+
+        // Where to start inserting data
+        const startRow = 2;
+        const startColumn = 1;
+
+        sheet.getRange(startRow, startColumn, Studata.length, Studata[0].length).setValues(Studata);
+
+        // Statement that runs if all the data has been added 
+        console.log("New Student data has been added");
+    } catch (error) {
+        console.error("Error: " + error.toString());
+    }
+}
+
+
+
+
+
+
+
+function retrieveCourseData() {
+    try {
+        const classdata = Classroom.Courses.list().courses;
+
+        // Initialize an array to store the data
+        const Coursedata = [];
+
+        // Loop through each course in Classroom
         classdata.forEach(course => {
             // Retrieve all students for the current course
             const students = Classroom.Courses.Students.list(course.id).students;
@@ -25,29 +68,28 @@ function retrieveData() {
                         const score = submission.assignedGrade ? submission.assignedGrade : "-";
                         
                         // Push data into array for each combination
-                        data.push([course.name, student.profile.name.familyName, student.profile.name.givenName, student.profile.emailAddress, work.title, score]);
+                        Coursedata.push([work.title, score ]);
                     }
                 });
             });
         });
 
-        Logger.log(data);
+        Logger.log(Coursedata);
 
-        //link spreadsheet
+        // Link spreadsheet
         const spreadsheet = SpreadsheetApp.openById("1hQzk67w5Au7fCMPb4ySJ81S1qQGRV9v350Lfxycu7Tk");
         const sheet = spreadsheet.getSheetByName("testsheet");
 
-        //where to start inserting data
-        const startRow = 2;
-        const startColumn = 1;
+        // Where to start inserting data
+        const startRow = 1;
+        const startColumn = 4;
 
-        sheet.getRange(startRow, startColumn, data.length, data[0].length).setValues(data);
+        sheet.getRange(startRow, startColumn, Coursedata.length, Coursedata[0].length).setValues(Coursedata);
 
-        
-        //statement that runs if all the data has been added 
-        console.log("New classroom data has been added");
+        // Statement that runs if all the data has been added 
+        console.log("New Course data has been added");
+
     } catch (error) {
         console.error("Error: " + error.toString());
     }
 }
-// 
