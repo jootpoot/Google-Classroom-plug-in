@@ -22,6 +22,7 @@ END retrieveCourseDataFrom
 
 BEGIN retrieveCourseData
 
+    //declaration of variables
     LET classdata = NEW Classroom.Courses Object 
     LET Coursedata = 
 
