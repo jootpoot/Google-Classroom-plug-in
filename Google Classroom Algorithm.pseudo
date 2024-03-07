@@ -1,7 +1,7 @@
 BEGIN retrieveStuInfoData
     
     LET classdata = NEW Classroom.Courses OBJECT 
-    LET Studata = 
+    DECLARE Coursedata[]
 
     FOREACH classdata IN course
         LET students = NEW Classroom.Courses.Students OBJECT
@@ -11,20 +11,28 @@ BEGIN retrieveStuInfoData
         PUSH ([family name, given name, email address]) IN Studata
     END FOR
     
-    LET spreadsheet = 
-    LET sheet = 
+    LET spreadsheet = NEW SpreadsheetApp.openByID OBJECT 
+    LET sheet = NEW spreadsheet.getSheetByName OBJECT
 
     LET startRow = 2
     LET startColumn = 1
 
+
+    PRINT "New Student data has been added"
 END retrieveCourseDataFrom
+
+
+
+
+
+
 
 
 BEGIN retrieveCourseData
 
     //declaration of variables
     LET classdata = NEW Classroom.Courses Object 
-    LET Coursedata = 
+    DECLARE Coursedata[]
 
     FOREACH classdata in course
         LET students = NEW Classroom.Courses.Students Object
@@ -45,7 +53,14 @@ BEGIN retrieveCourseData
 
             PUSH([work title, score]) IN Coursedata 
     END FOR
+
+    LET spreadsheet = NEW SpreadsheetApp.openByID OBJECT 
+    LET sheet = NEW spreadsheet.getSheetByName OBJECT
+
+    LET startRow = 1
+    LET startColumn = 4
+
+    PRINT "New Course data has been added"
+
 END retrieveCourseData
 
-LET spreadsheet = NEW SpreadsheetApp.openByID OBJECT 
-LET sheet = NEW spreadsheet.getSheetByName OBJECT
