@@ -39,16 +39,16 @@ BEGIN retrieveCourseData
         LET courseWork = NEW Classroom.Courses.CourseWork Object
     
 
-        FOREACH courWork in work 
+        FOREACH courseWork in work 
             LET submissions = NEW Classroom.Courses.Course.StudentSubmissions Object
         END FOREACH
 
         FOREACH submissions in submission 
-            LET student = 
+            LET student = findstudentwithuserID (students, submission.userId)
         END FOR
 
-        IF student
-            LET score = 
+        IF student = true
+            LET score = assignedGrade
         END IF
 
             PUSH([work title, score]) IN Coursedata 
