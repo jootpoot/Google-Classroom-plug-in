@@ -24,10 +24,6 @@ END retrieveCourseDataFrom
 
 
 
-
-
-
-
 BEGIN retrieveCourseData
 
     //declaration of variables
