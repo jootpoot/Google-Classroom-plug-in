@@ -1,4 +1,4 @@
-# Google-Classroom-Export-plug-in
+# Google-Classroom-plug-in
 Yr 12 SDD
 
 /* Student Name(s): Jyotsana Nair, Kevin Liu, Aishani Bhatt
