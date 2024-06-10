@@ -1,3 +1,4 @@
+// Kevin
 function retrieveCourseStuInfoData() {
     try {
       const classdata = Classroom.Courses.list({
@@ -40,7 +41,7 @@ function retrieveCourseStuInfoData() {
     }
   }
   
-  
+  // Aishani
   function updateData() {
     const classdata = Classroom.Courses.list({
       courseStates: 'ACTIVE'
@@ -63,7 +64,10 @@ function retrieveCourseStuInfoData() {
       }
   
       const studentData = {};
-// Jyotsana
+  
+  
+    // Jyotsana {
+      // Loops through each student and create an object to store their data
       students.forEach(student => {
         studentData[student.profile.emailAddress] = {
           firstName: student.profile.name.givenName,
@@ -72,13 +76,15 @@ function retrieveCourseStuInfoData() {
           scores: {}
         };
       });
-  
+      // Loops through each piece of course work and gets submissions
       courseWork.forEach(work => {
         const submissions = Classroom.Courses.CourseWork.StudentSubmissions.list(course.id, work.id).studentSubmissions;
   
+        // Loops through each submission and matches the student to the submission
         submissions.forEach(submission => {
           const student = students.find(student => student.userId === submission.userId);
   
+          //update their scores, if there is no score it assigns "-"
           if (student) {
             const score = submission.assignedGrade? submission.assignedGrade : "-";
             studentData[student.profile.emailAddress].scores[work.title] = score;
@@ -92,6 +98,7 @@ function retrieveCourseStuInfoData() {
       sheet.getRange(1, 1,1, headers.length).setFontWeight('bold');
       sheet.getRange(1, 1, 1, headers.length).setBackground('#9BC1BC');
   
+      // Creates an array of formatted data to output
       const data = Object.keys(studentData).map(email => {
         const student = studentData[email];
         return [student.lastName, student.firstName, student.email].concat(courseWork.map(work => student.scores[work.title] || "-"));
@@ -111,3 +118,5 @@ function retrieveCourseStuInfoData() {
   function onChanges() {
     updateData();
   }
+  // }
+  
